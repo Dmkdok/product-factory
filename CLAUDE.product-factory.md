@@ -5,6 +5,7 @@ For greenfield sites/apps, use skill `orchestrate-product`.
 - No application code until the user approves the plan (`утверждаю`)
 - After approval: implement → test → review → handoff → deploy (optional)
 - Prefer subagents: product-planner, architect, implementer, tester, reviewer
+- Token/context hygiene: skill `context-token-optimization` — always, not on request
 
 ## Git
 

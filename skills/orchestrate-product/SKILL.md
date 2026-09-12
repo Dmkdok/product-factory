@@ -73,6 +73,10 @@ Two practices from Claude Code's own best-practices guide, which apply directly 
   exploration doesn't consume your main context" — the documented fix for reading many files while
   researching. A subagent works in its own window and returns only the summary.
 
+Beyond these two, general context/token hygiene (bounded reads, batched tool calls, scratchpad
+persistence, tool-schema footprint) is skill `context-token-optimization` — it applies from Phase 0
+onward, not only here.
+
 ## Skill name resolution
 
 Every cross-reference below (`discover-requirements`, `draft-product-spec`, `code-review`, ...) is a
@@ -120,13 +124,14 @@ docs/
 
 Copy structure from `templates/product-factory/` when present, else `templates/` (pack root case).
 
-**Dependency preflight.** Six skills this pipeline calls by name — `coding-discipline`,
-`concise-mode`, `secure-review`, `web-design-guidelines`, `frontend-design`, `ui-quality-audit` — are
-bundled in this pack's own `skills/` (see README "Dependencies"), so this only matters if the copy
-you're running from is partial. `code-review` and `simplify` need no check at all — they ship with
-Claude Code itself, not as files. Confirm the six resolve before the phase that needs them (Phase 4
-and 6 mostly); a missing one is not fatal — that phase runs without it — but say so to the user once,
-in Russian, rather than silently skipping a step they expect run.
+**Dependency preflight.** Seven skills this pipeline calls by name — `coding-discipline`,
+`concise-mode`, `secure-review`, `web-design-guidelines`, `frontend-design`, `ui-quality-audit`,
+`context-token-optimization` — are bundled in this pack's own `skills/` (see README "Dependencies"),
+so this only matters if the copy you're running from is partial. `code-review` and `simplify` need
+no check at all — they ship with Claude Code itself, not as files. Confirm the seven resolve before
+the phase that needs them (Phase 4 and 6 mostly, `context-token-optimization` from Phase 0 on); a
+missing one is not fatal — that phase runs without it — but say so to the user once, in Russian,
+rather than silently skipping a step they expect run.
 
 ### Phase 1 — Elicit (read skill `discover-requirements`)
 
