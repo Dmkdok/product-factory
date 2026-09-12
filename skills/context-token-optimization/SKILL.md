@@ -12,7 +12,7 @@ description: >-
   everything else, in or out of that pipeline.
 metadata:
   author: product-factory
-  version: "1.0.0"
+  version: "1.2.0"
   sources: See references/deep-dive.md for the full citation list.
 ---
 
@@ -91,8 +91,11 @@ Two different tools for two different problems — don't reach for the heavier o
     failed attempts, not useful history; a sharper prompt in a clean session usually resolves it
     faster than a third try.
   - The task has drifted to something unrelated to what the dialogue was originally about.
-  - A plan was just approved, or a milestone just closed — the deliberation that produced it is
-    dead weight for the execution phase; the written plan/`docs/STATUS.md` carries what's needed.
+  - A major open decision was just settled (a plan approved, a milestone closed, an approach agreed
+    after back-and-forth) — the deliberation that produced it doesn't need to travel forward with
+    you; whatever now records the decision (a written plan, `docs/STATUS.md`, an ADR) carries it.
+    `orchestrate-product`'s gate-then-`/clear` rule is one specific instance of this, not a separate
+    rule.
   - Reviewing code the same session just wrote — a fresh session has no stake in the code being fine.
 
 If compacting manually or reasoning about what an automatic compaction should keep: clear out old
