@@ -4,6 +4,7 @@
 
 - Tool-schema bloat: verified numbers
 - Multi-agent cost: verified numbers and the compounding risk
+- Lost in the middle: positional bias in long contexts
 - TOON — real savings, real caveat
 - Other OSS references
 - Provider/infra techniques (building your own Claude-backed system)
@@ -43,6 +44,20 @@ spins up 3–5 subagents in parallel, each with its own context window, then syn
 - Practical implication: cap fan-out width explicitly, and treat a subagent returning far more than
   its stated budget as a sign to re-scope its task, not as something to summarize after the fact
   once it's already in context.
+
+## Lost in the middle: positional bias in long contexts
+
+Liu et al., "Lost in the Middle: How Language Models Use Long Contexts" (TACL 2024) — one of the
+most-cited findings in the long-context literature: recall of a fact follows a U-shape over its
+position in the context, strongest at the start and end, weakest in the middle, by as much as 20+
+percentage points on some benchmarks.
+
+- Still measurably present in 2026 on large-context models, including on windows far below their
+  advertised maximum — a bigger context window doesn't retire the effect.
+- Practical fix isn't "make the context smaller" (that's the rest of this skill) but *governed
+  placement*: fewer, higher-signal context objects, ordered deliberately, with the load-bearing
+  instruction or fact placed at an edge rather than mid-document. Relevant every time you assemble a
+  long tool result, a big subagent handoff, or a long synthesis for the user.
 
 ## TOON — real savings, real caveat
 
@@ -92,6 +107,10 @@ skill `claude-api` rather than trusting numbers memorized here — these move.
 - **Cap and shape output tokens.** Set an explicit output budget appropriate to the task — a
   classification doesn't need a long completion. Uncontrolled output length is a common silent cost
   leak, separate from everything above, which is about input-side tokens.
+- **Extended-thinking budgets are a token cost too.** When calling the API directly with extended
+  thinking enabled, size the thinking-token budget to the task's actual difficulty — a large fixed
+  budget applied to every call (including easy ones) is the output-token version of the same
+  "uncontrolled length" leak, just on the reasoning side instead of the answer side.
 
 ## Sources
 
@@ -99,6 +118,7 @@ skill `claude-api` rather than trusting numbers memorized here — these move.
 - Anthropic, [How we built our multi-agent research system](https://www.anthropic.com/engineering/multi-agent-research-system)
 - Claude Docs, [Tool search tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool)
 - Claude Docs, [Skill authoring best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)
+- Liu et al., [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172) (TACL 2024)
 - [github.com/toon-format/toon](https://github.com/toon-format/toon)
 - [github.com/microsoft/LLMLingua](https://github.com/microsoft/LLMLingua)
 - [github.com/mufeedvh/code2prompt](https://github.com/mufeedvh/code2prompt)

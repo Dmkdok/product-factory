@@ -36,7 +36,13 @@ information and trim the packaging instead.
   avoids paying for extra round-trips of restated context.
 - **Persist multi-step state to the scratchpad, not the transcript.** Collecting N items or
   iterating a long list: append to a scratchpad file and re-read it, instead of keeping a growing
-  list alive in conversation history.
+  list alive in conversation history. Scratchpad is session-scoped; if this environment also
+  provides a persistent cross-session memory (check for one), a fact worth keeping *beyond this
+  task* belongs there instead of being re-derived from scratch next session.
+- **Position matters, not just size.** Long contexts recall the start and the end more reliably
+  than the middle — a well-documented positional bias ("lost in the middle") that persists even on
+  large context windows. Put the decision-critical instruction or fact at the start or end of a
+  long tool result or subagent handoff, not buried in the middle of a wall of output.
 - **Don't `ToolSearch` a tool you won't call this turn.** A deferred tool's schema, once fetched,
   stays part of the session's context going forward — every fetch is a one-way addition, not a
   free look. Same principle when authoring a subagent: restrict its `Tools:` list to what its job
@@ -72,18 +78,30 @@ of copying it — do the same rather than re-deriving the framework here.
 - `/fast` mode is Opus with faster output, not a cheaper tier — don't route mechanical work to it
   expecting a cost win.
 
-## When to start a fresh session
+## Compaction and fresh sessions
 
-- The same correction has been given twice in this dialogue without it sticking — the context past
-  that point is failed attempts, not useful history; a new session with a sharper prompt usually
-  resolves it faster than a third try.
-- The task has drifted to something unrelated to what the dialogue was originally about.
-- A plan was just approved, or a milestone just closed — the deliberation that produced it is dead
-  weight for the execution phase; the written plan/`docs/STATUS.md` carries what's needed forward.
-- Reviewing code the same session just wrote — a fresh session has no stake in the code being fine.
+Two different tools for two different problems — don't reach for the heavier one by habit:
 
-Say so plainly and suggest `/clear` or a new session; don't silently push forward in a polluted
-context on the assumption that raising it would itself cost tokens.
+- **`/compact`** — same session continues, history gets summarized. Use when the task itself isn't
+  done yet but the transcript is getting heavy. Pass what to keep as an argument when it matters
+  (architectural decisions, constraints) rather than trusting automatic selection — cheaper than
+  finding out later that the summary dropped something you needed.
+- **`/clear` or a new session** — nothing about this task carries forward. Use when:
+  - The same correction has been given twice without it sticking — the context past that point is
+    failed attempts, not useful history; a sharper prompt in a clean session usually resolves it
+    faster than a third try.
+  - The task has drifted to something unrelated to what the dialogue was originally about.
+  - A plan was just approved, or a milestone just closed — the deliberation that produced it is
+    dead weight for the execution phase; the written plan/`docs/STATUS.md` carries what's needed.
+  - Reviewing code the same session just wrote — a fresh session has no stake in the code being fine.
+
+If compacting manually or reasoning about what an automatic compaction should keep: clear out old
+tool results (finished `Read`/`Grep`/`Bash` output no longer needed) before summarizing prose — it's
+the cheapest, safest first cut, and it's what Claude Code's own compaction does before touching
+anything else.
+
+Say so plainly and suggest the appropriate one; don't silently push forward in a polluted context
+on the assumption that raising it would itself cost tokens.
 
 ## Guardrails — never trade correctness for tokens
 
