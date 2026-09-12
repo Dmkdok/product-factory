@@ -1,6 +1,6 @@
 {
   "name": "product-factory",
   "displayName": "Product Factory Pipeline",
-  "version": "1.3.0",
-  "description": "End-to-end product delivery pipeline: discovery -> spec -> plan -> gated approval -> implement -> test -> review -> handoff -> deploy (optional). 16 skills (10 pipeline + 6 bundled dependencies) + 5 agents, portable across projects."
+  "version": "1.4.0",
+  "description": "End-to-end product delivery pipeline: discovery -> spec -> plan -> gated approval -> implement -> test -> review -> handoff -> deploy (optional). 17 skills (10 pipeline + 7 bundled dependencies) + 5 agents, portable across projects."
 }

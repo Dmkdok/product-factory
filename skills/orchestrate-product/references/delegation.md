@@ -97,6 +97,7 @@ never paste file contents back.
 | 6 | `review-product`, `web-design-guidelines`, `secure-review`, `code-review`, `simplify` |
 | 8 (optional) | `deploy-product` — only when a real deploy target exists |
 | any | `concise-mode` when user asks кратко / экономь токены |
+| any | `context-token-optimization` — general context/token hygiene, load by default |
 | optional | `ui-quality-audit` — **only** on explicit UI/UX deep-audit request; not default Phase 6 |
 
 ## Reading code (Serena)
