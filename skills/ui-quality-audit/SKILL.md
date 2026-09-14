@@ -8,10 +8,11 @@ description: >-
   MVP — not during default orchestrate-product Phase 6 (that uses
   web-design-guidelines).
 context: fork
+agent: reviewer
 background: false
 metadata:
   author: product-factory
-  version: "1.0.0"
+  version: "1.2.0"
   optional: true
   lang_user: ru
   lang_internal: en
@@ -49,6 +50,8 @@ metadata:
 ## Serena-first exploration (when available)
 
 Use **Serena MCP** for semantic navigation. This audit is **read-only** — never call Serena edit/refactor tools.
+Tool names below are shorthand for the fully-qualified `mcp__serena__<name>` — call them qualified so
+they resolve correctly alongside any other MCP server the target project may have attached.
 
 **Allowed:** `activate_project`, `onboarding` (if helpful), `list_dir`, `find_file`, `read_file`, `search_for_pattern`, `get_symbols_overview`, `find_symbol`, `find_referencing_symbols`, `find_declaration`, `find_implementations`, `get_diagnostics_for_file` / `get_diagnostics_for_symbol`, `query_project` (read-only), memory read/write for audit notes.
 

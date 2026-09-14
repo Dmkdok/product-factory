@@ -4,12 +4,12 @@ description: >-
   Behavioral guardrails against common LLM coding mistakes: think before coding,
   simplicity first, surgical diffs, goal-driven verified loops. Use during
   implementation, refactors, bugfixes, or whenever the agent risks overbuilding.
-  Inspired by widely adopted Karpathy-derived agent guidelines (~170k★).
+  Inspired by widely adopted Karpathy-derived agent guidelines (200k+★).
 metadata:
   author: product-factory
-  version: "1.1.0"
+  version: "1.2.0"
   inspired_by: multica-ai/andrej-karpathy-skills
-  cross_checked_with: DietrichGebert/ponytail (community skill; JetBrains-measured -10% cost, no quality loss)
+  cross_checked_with: DietrichGebert/ponytail (community skill; self-reported ~20% cheaper, ~54% less code, measured by the repo's own author on real Claude Code sessions editing a FastAPI+React repo — not an independent/JetBrains study)
 ---
 
 # Coding Discipline

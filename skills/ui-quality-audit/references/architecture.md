@@ -2,7 +2,7 @@
 
 TOC: [Scope](#scope) · [Structure](#1-structure) · [Components](#2-components--design-system) · [State](#3-state) · [Data-UI](#4-data--ui-boundary) · [Errors](#5-errors--resilience) · [Perf UX](#6-performance-as-ux) · [Framework notes](#7-framework-notes)
 
-Audit whether the *implementation* can sustain a high-quality UI. Cite concrete modules. Prefer principles from **alan2207/bulletproof-react** (~35k★), feature-based boundaries, SOLID at component scale — adapted to the stack in use (React/Vue/Svelte/Angular/SwiftUI/Compose/WinUI/etc.).
+Audit whether the *implementation* can sustain a high-quality UI. Cite concrete modules. Prefer principles from **alan2207/bulletproof-react** (~36k★), feature-based boundaries, SOLID at component scale — adapted to the stack in use (React/Vue/Svelte/Angular/SwiftUI/Compose/WinUI/etc.).
 
 ## Scope
 

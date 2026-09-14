@@ -32,7 +32,7 @@ Use these when citing. Prefer primary docs over blogs.
 
 | Source | Approx. standing | Use for |
 |--------|------------------|---------|
-| [alan2207/bulletproof-react](https://github.com/alan2207/bulletproof-react) | ~35k★ | Feature structure, API layer, state split, standards |
+| [alan2207/bulletproof-react](https://github.com/alan2207/bulletproof-react) | ~36k★ | Feature structure, API layer, state split, standards |
 | SOLID (Uncle Bob) applied to UI modules | Industry design principles | Component/hook responsibility |
 | [WAI / a11y project patterns](https://www.a11yproject.com/) | Community + references | Practical a11y checks |
 
@@ -47,6 +47,6 @@ Use these when citing. Prefer primary docs over blogs.
 
 | Tool | Standing | Role |
 |------|----------|------|
-| [oraios/serena](https://github.com/oraios/serena) | ~27k★ MCP | Symbol-level read-only codebase navigation |
+| [oraios/serena](https://github.com/oraios/serena) | ~29k★ MCP | Symbol-level read-only codebase navigation |
 
 When a lesser blog contradicts these primaries, **trust the primary**.
