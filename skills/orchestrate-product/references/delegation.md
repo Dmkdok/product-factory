@@ -99,11 +99,16 @@ never paste file contents back.
 | any | `concise-mode` when user asks кратко / экономь токены |
 | any | `context-token-optimization` — general context/token hygiene, load by default |
 | optional | `ui-quality-audit` — **only** on explicit UI/UX deep-audit request; not default Phase 6 |
+| optional | `setup-ci` — **only** on explicit request; `disable-model-invocation`, never auto-loaded |
 
 ## Reading code (Serena)
 
 This project has Serena, an LSP-backed symbol index. Reading source files whole is what exhausted a
 previous session's context — the tree is ~450 KB, about 115k tokens if read end to end.
+
+Every tool name below (`get_symbols_overview`, `find_symbol`, ...) is shorthand for the
+fully-qualified MCP tool `mcp__serena__<name>`. Call it qualified — a bare name can fail to resolve
+once a target project has more than one MCP server attached, which this pack cannot assume it won't.
 
 Give every code-touching agent this protocol:
 

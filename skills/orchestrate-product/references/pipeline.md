@@ -19,12 +19,16 @@ DoR is met when all are true:
 |-------|----------|-------|
 | 1 | `docs/BRIEF.md` | product-planner |
 | 2 | `docs/SPEC.md` | product-planner |
-| 3 | `docs/PLAN.md`, `docs/TASKS.md` | architect |
+| 3 | `docs/PLAN.md`, `docs/TASKS.md`, `docs/CONVENTIONS.md` | architect |
 | 4 | source tree | implementer(s) |
 | 5 | test report in `docs/STATUS.md` | tester |
 | 6 | review notes | reviewer |
 | 7 | `docs/HANDOFF.md` | parent |
-| 8 (optional) | `docs/RELEASE.md` | parent / implementer |
+| 8 (optional) | `docs/RELEASE.md` + `docs/CHANGELOG.md` entry | parent / implementer |
+| optional, any point | CI config (`setup-ci`, only on request) | parent |
+
+`docs/CHANGELOG.md` itself is scaffolded empty at Phase 0, not Phase 8 — Phase 8 (or an
+`iterate-product` close with no deploy) is only where it gets its first real entry.
 
 ## Web-first defaults (when user did not choose)
 
@@ -34,7 +38,8 @@ Prefer current mainstream defaults unless constrained:
 - **SaaS web app**: TypeScript, Next.js or similar full-stack, Postgres, auth library with good docs, Playwright e2e
 - **API**: OpenAPI-first, typed handlers, integration tests
 
-Always verify library docs with a quick web check if unsure about mid-2026 APIs.
+Always verify library docs with a quick web check if unsure about the current API surface — check
+today's date rather than assuming a fixed year.
 
 ## Parallelism rules
 

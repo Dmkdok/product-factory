@@ -9,7 +9,7 @@ description: >-
 compatibility: Cursor Agent, Claude Code; Plan Mode recommended for Phase 1–3
 metadata:
   author: product-factory
-  version: "1.1.0"
+  version: "1.3.0"
   lang_user: ru
   lang_internal: en
 ---
@@ -118,9 +118,17 @@ docs/
   SPEC.md
   PLAN.md
   TASKS.md
+  CONVENTIONS.md
   DECISIONS.md
   STATUS.md
+  CHANGELOG.md
 ```
+
+`CONVENTIONS.md` is written in Phase 3 (`draft-tech-plan`), not here — listed now so Phase 0 scaffolding
+and Phase 4 delegation both expect the same file set. `CHANGELOG.md` **is** scaffolded here, empty,
+from `templates/CHANGELOG.template.md` — it only gets real entries starting at Phase 8 (`deploy-product`)
+or at an `iterate-product` close for a local-only product, but the empty file exists from Phase 0 so
+no later phase has to remember to create it.
 
 Copy structure from `templates/product-factory/` when present, else `templates/` (pack root case).
 
@@ -148,9 +156,9 @@ Produce `docs/SPEC.md`: problem, users, scope, non-goals, UX flows, acceptance c
 
 ### Phase 3 — Tech plan (`draft-tech-plan`)
 
-Produce `docs/PLAN.md` + `docs/TASKS.md`: stack, architecture, file map, milestones, parallel workstreams, test strategy, Definition of Done.
+Produce `docs/PLAN.md` + `docs/TASKS.md` + `docs/CONVENTIONS.md`: stack, architecture, file map, milestones, parallel workstreams, test strategy, Definition of Done, and the naming/structure/testing rules every Phase 4 subagent reads.
 
-Web research is allowed for current docs/libraries (mid-2026+). Prefer boring, proven defaults unless the user constrained otherwise.
+Web research is allowed for current docs/libraries — check today's date rather than assuming a fixed year. Prefer boring, proven defaults unless the user constrained otherwise.
 
 ### GATE — User approval
 
@@ -211,7 +219,15 @@ Skip entirely for a local-only product. When a real deploy target exists and the
 shipped, not just handed off: load `deploy-product`. It refuses to run past a FAIL review verdict,
 requires a rollback plan written down before the deploy starts, and proves the deployed artifact
 works with a smoke test against the live target — a green deploy pipeline is not that proof by
-itself. Writes `docs/RELEASE.md`.
+itself. Writes `docs/RELEASE.md` and appends to `docs/CHANGELOG.md`.
+
+### Optional: CI (`setup-ci`)
+
+Not a numbered phase and not default — **most projects here run without CI.** `setup-ci` is
+`disable-model-invocation`, so it never triggers on its own; load it only when the user explicitly
+asks for CI/CD, or said yes to "CI expected?" at discovery and now confirms they want it scaffolded.
+It has no fixed place in the pipeline — commonly after Phase 4 once there's something to lint/test,
+sometimes requested up front. It never adds a deploy step; that stays `deploy-product`'s job.
 
 ## Progress checklist
 
@@ -239,6 +255,7 @@ Copy into `docs/STATUS.md` and tick:
 - Closing with “should work” without running verification
 - Drive-by refactors and speculative architecture (violates `coding-discipline`)
 - Auto-running `ui-quality-audit` on every delivery (optional skill — only on explicit request)
+- Auto-running `setup-ci` because the user mentioned tests or deploy — it's optional, ask first
 - Claiming tests green from TASKS checkboxes or chat memory without running the suite
 - Dumping all of `docs/` into every subagent prompt
 - Deploying (Phase 8) past a FAIL review verdict, or with no rollback plan written down first

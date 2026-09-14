@@ -11,7 +11,7 @@ compatibility: >-
   docs/PLAN.md and docs/TASKS.md, and a runnable test suite.
 metadata:
   author: product-factory
-  version: "1.0.0"
+  version: "1.2.0"
   lang_user: ru
   lang_internal: en
 ---
@@ -196,14 +196,26 @@ moved. Also load `code-review` and `simplify` for a diff-quality pass — a diff
 
 Tick the milestone, rewrite `## Resume here` in `docs/STATUS.md`, and report to the user in Russian:
 what changed, suite results with counts, what was deferred and where that is recorded, and the next
-open item. Use the `pause` skill if the session ends here.
+open item. Use the `close-session` skill if the session ends here and there's time for a proper
+close; use `pause` instead only if the user needs to leave immediately.
+
+If this iteration ships without a formal deploy (a local-only product, or "done" means merged), and
+the change is user-visible, append one entry to `docs/CHANGELOG.md` here — don't rely on Phase 8 to
+do it, since Phase 8 is skipped in that case. Create the file from
+`templates/CHANGELOG.template.md` if it doesn't exist yet.
 
 ### Phase 8 — Deploy (optional, `deploy-product`)
 
 Skip for a local-only change. When this iteration ships to a real environment, load
 `deploy-product` after close: it refuses to run past a FAIL review verdict, requires a rollback plan
 written down first, and proves the deployed artifact works with a smoke test against the live
-target. Writes/updates `docs/RELEASE.md`.
+target. Writes/updates `docs/RELEASE.md` and appends to `docs/CHANGELOG.md` — skip the Phase 7
+CHANGELOG step above if this phase runs, so the change isn't logged twice.
+
+### Optional: CI (`setup-ci`)
+
+Same as the parent pipeline — not a phase, not default. Load only on explicit request; it never
+triggers on its own (`disable-model-invocation`).
 
 ## Regression contract
 
@@ -226,3 +238,4 @@ Applies from the gate to the close, for every agent working the iteration:
 - Fixing what is merely nearby
 - Treating a phased plan inside the source document as if it were already approved scope
 - Deploying (Phase 8) past a FAIL review verdict, or with no rollback plan written down first
+- Auto-running `setup-ci` because the change touched tests — it's optional, ask first

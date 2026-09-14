@@ -7,10 +7,11 @@ description: >-
   a security audit. Lean checklist inspired by Trail of Bits static-analysis
   practice — not a full Semgrep/CodeQL plugin clone.
 context: fork
+agent: reviewer
 background: false
 metadata:
   author: product-factory
-  version: "1.0.0"
+  version: "1.2.0"
   inspired_by: trailofbits/skills static-analysis
 ---
 
@@ -30,9 +31,28 @@ Skeptical security pass. Prefer evidence over vibes. Write findings into `docs/R
 1. Detect stack (web, API, mobile, desktop) and trust boundaries
 2. Manual checklist (below)
 3. If `semgrep` on PATH → optional scan (ask user if large/paid rulesets)
-4. Triage: true positive vs noise; cite file paths
-5. Merge into review verdict
+4. Dependency audit (below) — run the stack's real audit tool, don't skip to "lockfile exists"
+5. Triage: true positive vs noise; cite file paths
+6. Merge into review verdict
 ```
+
+### Dependency audit
+
+Run whichever applies to the detected stack — don't invent a tool that isn't installed, and say so
+if none is available rather than silently skipping to the lockfile-only check:
+
+```bash
+npm audit --omit=dev          # Node, or: pnpm audit / yarn npm audit
+pip-audit                     # Python, if installed; pip list --outdated as a weaker fallback
+cargo audit                   # Rust
+govulncheck ./...             # Go
+```
+
+Triage output the same way as Semgrep findings — Critical/High block unless waived. For any **new**
+or major-version-bumped dependency in the diff, also spot-check its license (`npx license-checker`,
+the package registry page, or the repo's own `LICENSE`) against this project's own license — a
+copyleft dependency (GPL/AGPL) pulled into a project distributed under a permissive license is a
+finding, not a footnote.
 
 ### Optional Semgrep (when installed)
 
@@ -47,7 +67,10 @@ Language packs if relevant (`p/python`, `p/javascript`, `p/typescript`, `p/golan
 ### Secrets & supply chain
 - [ ] No API keys/tokens in repo, logs, or client bundles
 - [ ] `.env` gitignored; `.env.example` has placeholders only
-- [ ] Lockfile present; no knowingly abandoned critical deps on the hot path
+- [ ] Lockfile present
+- [ ] Dependency audit tool run for the detected stack (see Dependency audit above); Critical/High
+      vulnerabilities triaged, not left unexamined
+- [ ] New/major-bumped dependencies license-checked against the project's own license
 
 ### Authn / authz
 - [ ] Auth required routes actually enforced server-side

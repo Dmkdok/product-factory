@@ -23,6 +23,11 @@ flowchart LR
 ## Security
 -
 
+## Observability
+<!-- Logging, error tracking, alerting. An explicit "none for v1 — will notice failures via X" is a
+     valid answer; an unfilled section is not. -->
+-
+
 ## Repository map
 ```text
 /

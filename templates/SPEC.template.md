@@ -22,6 +22,7 @@
 - Security:
 - A11y:
 - SEO:
+- Observability: <logging/error-tracking/alerting in scope, or explicitly "none for v1">
 
 ## Content / data model
 -

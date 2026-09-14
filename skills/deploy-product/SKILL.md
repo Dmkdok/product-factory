@@ -5,6 +5,10 @@ description: >-
   not just that a deploy command exited 0. Optional Phase 8 after
   orchestrate-product/iterate-product's handoff or close. Use only when a real
   deploy target exists and the user wants it shipped, not just handed off.
+disable-model-invocation: true
+metadata:
+  author: product-factory
+  version: "1.2.0"
 ---
 
 # Deploy Product
@@ -46,9 +50,16 @@ against the real target proves otherwise.
    locally, now against the real target. A local-only green suite proves nothing about what's live.
 4. Confirm the rollback path is real — state the exact command/step, don't just assert one exists.
 5. Record everything in `docs/RELEASE.md` ([templates/RELEASE.template.md](../../templates/RELEASE.template.md)
-   or `templates/product-factory/RELEASE.template.md` in an installed project): what shipped, where,
-   when, by what method, smoke-test evidence, the rollback command.
-6. Update `docs/STATUS.md` and `docs/HANDOFF.md` so a resuming session knows the current *live*
+   or `templates/product-factory/RELEASE.template.md` in an installed project): what shipped, the
+   exact commit/version deployed (`git rev-parse --short HEAD`, or a tag if the project cuts them),
+   where, when, by what method, smoke-test evidence, the rollback command, and what will surface a
+   failure after this point (platform logs, error tracker, uptime check, or "none — check manually" —
+   pull this from `docs/PLAN.md` → Observability rather than inventing it here).
+6. Append one entry to `docs/CHANGELOG.md` ([templates/CHANGELOG.template.md](../../templates/CHANGELOG.template.md)):
+   what changed, user-visible first, with the same commit/version as step 5. If the file doesn't
+   exist yet (a product built before this template existed), create it from the template rather than
+   skipping the entry.
+7. Update `docs/STATUS.md` and `docs/HANDOFF.md` so a resuming session knows the current *live*
    state, not just what the tree contains.
 
 ## Rules

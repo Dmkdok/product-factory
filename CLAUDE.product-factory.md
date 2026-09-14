@@ -4,6 +4,7 @@ For greenfield sites/apps, use skill `orchestrate-product`.
 - Artifacts under `docs/`: English
 - No application code until the user approves the plan (`утверждаю`)
 - After approval: implement → test → review → handoff → deploy (optional)
+- CI is off by default — skill `setup-ci` only on explicit request, never auto-triggered
 - Prefer subagents: product-planner, architect, implementer, tester, reviewer
 - Token/context hygiene: skill `context-token-optimization` — always, not on request
 

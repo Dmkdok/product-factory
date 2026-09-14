@@ -45,7 +45,9 @@ Ask in batches of 5–8. Skip what the user already answered. Dig deeper on vagu
 ## Batch E — Quality & delivery
 
 1. Tests: unit / e2e required?
-2. CI expected?
+2. CI pipeline wanted? (most product-factory projects run without one — a "no" is the common,
+   fine answer; a "yes" is a note for later, load `setup-ci` only when they confirm they want it
+   scaffolded now, not automatically from this answer)
 3. Deploy as part of this run?
 4. Who maintains after handoff?
 5. Acceptance checklist in their words?

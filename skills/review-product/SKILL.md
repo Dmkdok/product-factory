@@ -5,7 +5,11 @@ description: >-
   against SPEC.md. Use after tests, before handoff, or when verifying claimed
   work. Pairs with web-design-guidelines for UI audits.
 context: fork
+agent: reviewer
 background: false
+metadata:
+  author: product-factory
+  version: "1.2.0"
 ---
 
 # Review Product
@@ -21,7 +25,8 @@ was never run, are the two failures this review exists to catch. Re-run the suit
 ## How to read the code
 
 Through Serena, not whole-file reads — an end-to-end read of a mid-size project costs ~115k tokens
-and surfaces nothing extra.
+and surfaces nothing extra. Tool names below are shorthand for the fully-qualified
+`mcp__serena__<name>` — call it qualified so it resolves correctly alongside any other MCP server.
 
 - `get_symbols_overview <file>` — a module's shape for ~200 tokens
 - `find_symbol <name> include_body=true` — the one function you are judging
@@ -36,6 +41,8 @@ Quote the minimum that makes a finding land; cite `file:line` and let the reader
 - [ ] Every SPEC in-scope item implemented or explicitly deferred in DECISIONS.md
 - [ ] Acceptance criteria evidenced by tests or manual QA notes
 - [ ] README / HANDOFF explains run, env, deploy
+- [ ] Observability decision from `PLAN.md`/`SPEC.md` honored: logging/error-tracking present if
+      scoped, or the "none for v1" was an actual decision, not a silently empty section
 
 ### Correctness
 - [ ] Happy paths work
@@ -55,7 +62,8 @@ Quote the minimum that makes a finding land; cite `file:line` and let the reader
 - [ ] Sensible structure matching PLAN.md
 - [ ] Diffs look surgical (flag drive-by refactors)
 - [ ] Dead code / TODOs called out
-- [ ] CI or at least documented test commands
+- [ ] Test commands documented (in `CONVENTIONS.md`/`CLAUDE.md`) — CI itself is optional per
+      `setup-ci` and its absence is never a finding on its own
 
 ## Output
 
