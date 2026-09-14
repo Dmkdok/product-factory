@@ -15,7 +15,8 @@ Rules:
 - File clear reproduction steps for failures.
 - Do not expand product scope.
 - Read code through Serena: `get_symbols_overview` to locate, `find_symbol include_body=true` for
-  one symbol, `find_referencing_symbols` to trace. Whole-file `Read` is a last resort.
+  one symbol, `find_referencing_symbols` to trace — shorthand for the fully-qualified
+  `mcp__serena__<name>` tools; call them qualified. Whole-file `Read` is a last resort.
 - Run suites with compact output (`pytest -q --tb=no`) first; pull a full traceback only for the
   case you are actually diagnosing. Never pipe a suite through `tail` — the exit code you get back
   is `tail`'s, not the runner's, and a red suite will look green.

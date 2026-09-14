@@ -5,6 +5,9 @@ description: >-
   Use after implementation milestones, before claiming delivery complete, or
   when debugging UI behavior. Adapts Anthropic webapp-testing patterns
   (reconnaissance-then-action, networkidle, role selectors).
+metadata:
+  author: product-factory
+  version: "1.1.0"
 ---
 
 # Test Product
@@ -92,4 +95,5 @@ Or TypeScript `@playwright/test` if the repo is JS/TS-first — match the stack.
 
 Use Serena rather than opening source files whole: `get_symbols_overview` for a module's shape,
 `find_symbol include_body=true` for the function under test, `find_referencing_symbols` to find
-everything that touches a suspect symbol.
+everything that touches a suspect symbol. These are shorthand for the fully-qualified
+`mcp__serena__<name>` tools — call them qualified.

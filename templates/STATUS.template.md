@@ -1,20 +1,24 @@
 # Status
 
+<!-- phase/approved/approved_at track orchestrate-product's greenfield gate. iterate-product tracks
+     its own gate per-iteration in the Checklist block below instead — leave these three blank/unused
+     on an iteration-only project rather than repurposing them. -->
 phase: intake
 approved: false
 approved_at:
 
+## Resume here
+<!-- Rewritten at every close: branch, tree state, next 3 actions, anything waiting on the owner. -->
+
 ## Checklist
-- [ ] Phase 0 intake
-- [ ] Phase 1 elicit (DoR met)
-- [ ] Phase 2 SPEC.md
-- [ ] Phase 3 PLAN.md + TASKS.md
-- [ ] GATE user approved
-- [ ] Phase 4 implementation
-- [ ] Phase 5 tests green
-- [ ] Phase 6 review clean (or accepted waivers)
-- [ ] Phase 7 handoff
-- [ ] Phase 8 deploy (optional, only if a real deploy target exists)
+<!--
+Paste the progress checklist from whichever pipeline is running, verbatim, and tick it here:
+- Greenfield build (`orchestrate-product`): its "Progress checklist" section (Phase 0 intake ...
+  Phase 8 deploy).
+- Existing product (`iterate-product`): its "Pipeline" section's copy-into-STATUS block
+  (0 Baseline ... 8 Deploy), prefixed with the iteration id, e.g. "Iteration I3 progress:".
+Do not hand-invent a third shape — both skills already define theirs; this file only holds it.
+-->
 
 ## Test report
 -

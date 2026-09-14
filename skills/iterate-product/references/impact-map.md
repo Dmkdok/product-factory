@@ -39,6 +39,8 @@ Answer these for every in-scope item from Phase 1. Nothing else.
 ## Finding the answers with Serena
 
 Reading files whole is what makes this phase expensive; symbol navigation is what makes it cheap.
+Tool names below are shorthand for the fully-qualified `mcp__serena__<name>` — use the qualified
+form when calling; a bare name can resolve to the wrong tool if another MCP server is also attached.
 
 - `get_symbols_overview <file>` — the shape of a module for roughly 200 tokens.
 - `find_symbol <name> include_body=true` — only the function actually under change.

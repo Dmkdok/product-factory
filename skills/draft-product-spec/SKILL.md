@@ -4,6 +4,9 @@ description: >-
   Turns an approved brief into an engineering-ready SPEC.md with flows,
   acceptance criteria, and non-goals. Use after elicitation or for PRD-style
   specs before implementation planning.
+metadata:
+  author: product-factory
+  version: "1.0.0"
 ---
 
 # Draft Product Spec

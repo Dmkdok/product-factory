@@ -8,6 +8,7 @@
 - `docs/DECISIONS.md` — one ADR per decision
 - `docs/TASKS.md` — one appended milestone
 - `docs/PLAN.md` — usually untouched
+- `docs/CONVENTIONS.md` — create once if missing, otherwise leave alone
 - `docs/STATUS.md` — the handoff
 - Commit shape
 
@@ -125,6 +126,15 @@ Touch it only when the architecture actually moves: a new dependency, a new serv
 boundary, a new directory in the repository map. A styling fix or a new endpoint inside an existing
 router is not an architecture change. When it does move, edit `## Architecture` and
 `## Repository map` and nothing else.
+
+## `docs/CONVENTIONS.md` — create once if missing, otherwise leave alone
+
+Every Phase 4 subagent reads this file. If it already exists (the normal case for a shipped
+product), don't touch it unless this iteration actually changes a naming/structure/testing
+convention — and if it does, that's a decision, so it gets an ADR like any other. If it's missing
+(a product built before this file existed in the pipeline), create it once from
+`templates/CONVENTIONS.template.md`, filled from what the existing codebase already does — infer
+the conventions, don't invent new ones — and commit it as part of the Phase 3 amendment commit.
 
 ## `docs/STATUS.md` — the handoff
 

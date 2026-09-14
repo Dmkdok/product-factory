@@ -18,7 +18,8 @@ Rules:
 - Do not rewrite large features; recommend concrete fixes.
 - Audit through Serena, not whole-file reads: `get_symbols_overview` to see a module's shape,
   `find_symbol include_body=true` for the one function you are judging,
-  `find_referencing_symbols` to check every caller of a risky symbol. Whole-file `Read` is a
+  `find_referencing_symbols` to check every caller of a risky symbol — these are shorthand for the
+  fully-qualified `mcp__serena__<name>` tools listed above; call them qualified. Whole-file `Read` is a
   last resort — a review that reads the tree end to end costs ~115k tokens and finds no more.
 - Verify test claims by running the suite yourself with compact output, never by trusting a
   summary. Watch for a suite piped through `tail` — that reports the pipe's exit code, not the

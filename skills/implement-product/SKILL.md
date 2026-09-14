@@ -4,6 +4,9 @@ description: >-
   Implements product work from an approved PLAN.md and TASKS.md using
   subagents, design skills, and official docs research. Use only after user
   plan approval (orchestrate-product gate) or when implementing assigned tasks.
+metadata:
+  author: product-factory
+  version: "1.1.0"
 ---
 
 # Implement Product
@@ -19,7 +22,8 @@ If gate not approved → stop and return to orchestrate-product.
 
 1. Read the SPEC section for your area, your TASKS milestone, and `docs/CONVENTIONS.md` — not the
    documents in full. Load skill **`coding-discipline`**. Explore code with Serena
-   (`get_symbols_overview` → `find_symbol`), not whole-file reads; edit with
+   (`get_symbols_overview` → `find_symbol`, i.e. the fully-qualified `mcp__serena__get_symbols_overview`
+   → `mcp__serena__find_symbol`), not whole-file reads; edit with
    `replace_symbol_body` / `replace_content`.
 2. Establish foundations first: tooling, tokens/layout shell, data layer, auth.
 3. Deliver a **vertical slice** early (one real user flow end-to-end).
